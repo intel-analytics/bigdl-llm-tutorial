@@ -1,6 +1,6 @@
 # Chapter 6 GPU Acceleration
 
-Apart from the significant acceleration capabilites on Intel CPUs, BigDL-LLM also supports optimizations and acceleration for running LLMs (large language models) on Intel GPUs.
+Apart from the significant acceleration capabilities on Intel CPUs, BigDL-LLM also supports optimizations and acceleration for running LLMs (large language models) on Intel GPUs.
 
 BigDL-LLM supports optimizations of any [*HuggingFace transformers*](https://huggingface.co/docs/transformers/index) model on Intel GPUs with the help of low-bit techniques, modern hardware accelerations and latest software optimizations.
 
@@ -24,11 +24,11 @@ In Chapter 6, you will learn how to run LLMs, as well as implement stream chat f
 
 ## 6.0 Environment Setup
 
-Here are some best practices for setting up your environment. It is strongly recommended that you follow the corresponding steps below to configure your environment properly.
+**The following sub-sectors give a rough example of how to setup environment on Data Center GPU, Linux system, and PyTorch 2.0. For more and detailed installation instructions, please refer to [environment setup page](environment_setup.md) or the GPU installation [Webpage](https://bigdl.readthedocs.io/en/latest/doc/LLM/Overview/install_gpu.html)**
 
 ### 6.0.1 System Recommendation
 
-For a smooth experience with the notebooks in Chatper 7, please ensure your hardware and OS meet the following requirements:
+For a smooth experience with the notebooks in Chapter 7, please ensure your hardware and OS meet the following requirements:
 
 > ⚠️Hardware
   - Intel Arc™ A-Series Graphics
@@ -39,11 +39,13 @@ For a smooth experience with the notebooks in Chatper 7, please ensure your hard
   - Linux system, Ubuntu 22.04 is preferred
 
     > **Note**
-    > Please note that only Linux OS has been supported for BigDL-LLM optimizations on Intel GPUs.
+    > Please note that both Linux and Windows OS are supported for BigDL-LLM optimizations on Intel GPUs.
+  
+
 
 ### 6.0.2 Driver and Toolkit Installation
 
-Before benifiting from BigDL-LLM on Intel GPUs, there’re several steps for tools installation:
+Before benefiting from BigDL-LLM on Intel GPUs, there are several steps for tools installation:
 
 - First you need to install Intel GPU driver. Please refer to our [driver installation](https://dgpu-docs.intel.com/driver/installation.html) for general purpose GPU capabilities.
   > **Note**
@@ -53,11 +55,9 @@ Before benifiting from BigDL-LLM on Intel GPUs, there’re several steps for too
   > **Note**
   > BigDL-LLM with default IPEX version (IPEX 2.0.110+xpu) requires Intel® oneAPI Base Toolkit's version == 2023.2.0.
 
-For client users with Intel Arc™ A-Series Graphics on Unbuntu 22.04, you could also refer to the commands below for driver and oneAPI Base Toolkit installation. See [environment setup page](environment_setup.md) for detailed commands.
-
 ### 6.0.3 Python Environment Setup
 
-Next, use a python environment management tool (we recommend using [Conda](https://docs.conda.io/projects/conda/en/stable/)) to create a python enviroment and install necessary libs.
+Next, use a python environment management tool (we recommend using [Conda](https://docs.conda.io/projects/conda/en/stable/)) to create a python environment and install necessary libs.
 
 #### 6.0.3.1 Install Conda
 
@@ -77,16 +77,13 @@ conda init
 > **Note**
 > Python 3.9 is recommended for running BigDL-LLM.
 
-Create a Python 3.9 environment with the name you choose, for example `llm-tutorial-gpu`:
+Create a Python 3.9 environment with the name you choose, for example `llm-tutorial-gpu` and install `bigdl-llm` from PyPI:
 
 ```bash
 conda create -n llm-tutorial-gpu python=3.9
-```
+conda activate llm-tutorial-gpu   # install ipex 2.0 and pytorch 2.0 in this environment
 
-Then activate the environment `llm-tutorial-gpu`:
-
-```bash
-conda activate llm-tutorial-gpu
+pip install --pre --upgrade bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
 ```
 
 ### 6.0.4 Best Known Configuration on Linux
