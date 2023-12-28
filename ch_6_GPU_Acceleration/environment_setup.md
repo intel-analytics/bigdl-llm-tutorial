@@ -2,13 +2,13 @@
 
 ## Linux
 
-Prerequisites: BigDL-LLM on Linux supports Intel Arc™ A-Series Graphics, Intel Data Center GPU Flex Series, and Intel Data Center GPU Max Series. In addition, we recommend using Python 3.9 since `bigdl-llm` has been tested with this version.
+**Prerequisites**: BigDL-LLM on Linux supports Intel Arc™ A-Series Graphics, Intel Data Center GPU Flex Series, and Intel Data Center GPU Max Series. In addition, we recommend using Python 3.9 since `bigdl-llm` has been tested with this version.
 
 **Importance:** We currently support the Ubuntu 20.04 operating system and later.
 
 
 ### 1. Downgrade kernels
-For Linux users, Ubuntu 22.04 and Linux kernel 5.19.0 is prefered. Ubuntu 22.04 and Linux kernel 5.19.0-41-generic is mostly used in our test environment. But default linux kernel of ubuntu 22.04.3 is 6.2.0-35-generic, so we recommonded you to downgrade kernel to 5.19.0-41-generic to archive the best performance.
+For Linux users, Ubuntu 22.04 and Linux kernel 5.19.0 are preferred. Ubuntu 22.04 and Linux kernel 5.19.0-41-generic are mostly used in our test environment. But the default Linux kernel of Ubuntu 22.04.3 is 6.2.0-35-generic, so we recommend you downgrade the kernel to 5.19.0-41-generic to achieve the best performance.
 
 Here are the steps to downgrade your kernel:
 ```bash
@@ -110,7 +110,7 @@ sudo apt install -y intel-oneapi-common-vars=2023.2.0-49462 \
 
 See the [GPU installation guide](https://bigdl.readthedocs.io/en/latest/doc/LLM/Overview/install_gpu.html) for mode details.
 
-### 4. Install BigDL-LLM and IPEX
+### 4. Install BigDL-LLM and IPEX (Intel Extension for Pytorch)
 IPEX 2.1 requries **PyTorch 2.1**, IPEX 2.0 requries **PyTorch 2.0**. We recommend using [miniconda](https://docs.conda.io/projects/miniconda/en/latest/) to create a python 3.9 environment:
 
 #### Install BigDL-LLM From PyPI
@@ -120,6 +120,7 @@ IPEX 2.1 requries **PyTorch 2.1**, IPEX 2.0 requries **PyTorch 2.0**. We recomme
 conda create -n llm python=3.9
 conda activate llm
 
+# the [xpu_2.1] indicates we are installing ipex2.1
 pip install --pre --upgrade bigdl-llm[xpu_2.1] -f https://developer.intel.com/ipex-whl-stable-xpu
 ```
 
@@ -128,6 +129,7 @@ pip install --pre --upgrade bigdl-llm[xpu_2.1] -f https://developer.intel.com/ip
 conda create -n llm python=3.9
 conda activate llm
 
+# the [xpu] indicates we are installing ipex2.0
 pip install --pre --upgrade bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
 ```
 
@@ -154,6 +156,7 @@ pip install torchvision-0.16.0a0+cxx11.abi-cp39-cp39-linux_x86_64.whl
 pip install intel_extension_for_pytorch-2.1.10+xpu-cp39-cp39-linux_x86_64.whl
 
 # install bigdl-llm for Intel GPU
+# the [xpu_2.1] indicates we are installing ipex2.1
 pip install --pre --upgrade bigdl-llm[xpu_2.1]
 ```
 
@@ -174,6 +177,7 @@ pip install torchvision-0.15.2a0+cxx11.abi-cp39-cp39-linux_x86_64.whl
 pip install intel_extension_for_pytorch-2.0.110+xpu-cp39-cp39-linux_x86_64.whl
 
 # install bigdl-llm for Intel GPU
+# the [xpu] indicates we are installing ipex2.0
 pip install --pre --upgrade bigdl-llm[xpu]
 ```
 
@@ -203,9 +207,9 @@ Please note that `libtcmalloc.so` can be installed by `conda install -c conda-fo
 
 ## Windows
 
-Prerequisites: BigDL-LLM on Windows supports Intel iGPU and dGPU.
+**Prerequisites**: BigDL-LLM on Windows supports Intel iGPU and dGPU.
 
-Importance: Currently Windows only supports IPEX 2.1, both the following GPU driver and oneAPI installation is only compatible with **PyTorch 2.1**. In addition, we recommend using Python 3.9 since `bigdl-llm` has been tested with this version.
+**Importance**: Currently Windows only supports IPEX(Intel Extension for Pytorch) 2.1, both the following GPU driver and oneAPI installation is only compatible with **PyTorch 2.1**. In addition, we recommend using Python 3.9 since `bigdl-llm` has been tested with this version.
 
 ### 1. Install Visual Studio 2022
 Install [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/downloads/) and select “Desktop development with C++” workload
@@ -219,7 +223,7 @@ Install or update to the latest driver, you can download it from [this page](htt
 Install from [this page](https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html). Choose the Windows operating system and your favored distribution, then you can download the installer(Estimated 2.7GB for the offline one and 17MB for the online one).
 
 
-### 4. Install BigDL-LLM and IPEX
+### 4. Install BigDL-LLM and IPEX (Intel Extension for Pytorch)
 
 We recommend using [miniconda](https://docs.conda.io/projects/miniconda/en/latest/) to create a python 3.9 environment:
 
@@ -229,7 +233,9 @@ We recommend using [miniconda](https://docs.conda.io/projects/miniconda/en/lates
 conda create -n llm python=3.9 libuv
 conda activate llm
 
-pip install --pre --upgrade bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
+# the [xpu_2.1] indicates we are installing ipex2.1
+pip install --pre --upgrade bigdl-llm[xpu_2.1] -f https://developer.intel.com/ipex-whl-stable-xpu
+
 ```
 
 #### Install BigDL-LLM From Wheel
@@ -240,6 +246,7 @@ First download wheels on your system:
 ```bash
 wget https://intel-extension-for-pytorch.s3.amazonaws.com/ipex_stable/xpu/torch-2.1.0a0%2Bcxx11.abi-cp39-cp39-win_amd64.whl
 wget https://intel-extension-for-pytorch.s3.amazonaws.com/ipex_stable/xpu/torchvision-0.16.0a0%2Bcxx11.abi-cp39-cp39-win_amd64.whl
+# here we download ipex2.1
 wget https://intel-extension-for-pytorch.s3.amazonaws.com/ipex_stable/xpu/intel_extension_for_pytorch-2.1.10%2Bxpu-cp39-cp39-win_amd64.whl
 ```
 
@@ -247,9 +254,9 @@ Then, install dependencies directly from the archived wheels and install `bigdl-
 ```bash
 pip install torch-2.1.0a0+cxx11.abi-cp39-cp39-win_amd64.whl
 pip install torchvision-0.16.0a0+cxx11.abi-cp39-cp39-win_amd64.whl
-pip install intel_extension_for_pytorch-2.1.10+xpu-cp39-cp39-win_amd64.whl
+pip install intel_extension_for_pytorch-2.1.10+xpu-cp39-cp39-win_amd64.whl   # here we install ipex2.1
 
-pip install --pre --upgrade bigdl-llm[xpu]
+pip install --pre --upgrade bigdl-llm[xpu_2.1]
 ```
 
 ### 5. Runtime Configuration

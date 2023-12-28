@@ -24,7 +24,7 @@ In Chapter 6, you will learn how to run LLMs, as well as implement stream chat f
 
 ## 6.0 Environment Setup
 
-**The following sector gives a rough example how to setup environment on Data Center GPU, Linux system, and PyTorch 2.0. For more and detailed installation options, please refer to [environment setup page](environment_setup.md).**
+**The following sub-sectors give a rough example of how to setup environment on Data Center GPU, Linux system, and PyTorch 2.0. For more and detailed installation instructions, please refer to [environment setup page](environment_setup.md) or the GPU installation [Webpage](https://bigdl.readthedocs.io/en/latest/doc/LLM/Overview/install_gpu.html)**
 
 ### 6.0.1 System Recommendation
 
@@ -39,7 +39,7 @@ For a smooth experience with the notebooks in Chapter 7, please ensure your hard
   - Linux system, Ubuntu 22.04 is preferred
 
     > **Note**
-    > Please note that only Linux OS has been supported for BigDL-LLM optimizations on Intel GPUs.
+    > Please note that both Linux and Windows OS are supported for BigDL-LLM optimizations on Intel GPUs.
   
 
 
@@ -81,7 +81,7 @@ Create a Python 3.9 environment with the name you choose, for example `llm-tutor
 
 ```bash
 conda create -n llm-tutorial-gpu python=3.9
-conda activate llm-tutorial-gpu
+conda activate llm-tutorial-gpu   # install ipex 2.0 and pytorch 2.0 in this environment
 
 pip install --pre --upgrade bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
 ```

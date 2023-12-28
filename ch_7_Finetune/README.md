@@ -14,7 +14,7 @@ We are going to train with a popular open source model [Llama-2-7b-hf](https://h
 
 ### Environment Setup 
 
-Please refer to [Chapter 6 Environment Setup](../ch_6_GPU_Acceleration/environment_setup.md) for detailed instruction to set up your environment on Intel GPUs. Remember to distinguish the setup discrepancies between **PyTorch 2.0** and **PyTorch 2.1**.
+Please refer to [Chapter 6 Environment Setup](../ch_6_GPU_Acceleration/environment_setup.md) or the GPU installation [Webpage](https://bigdl.readthedocs.io/en/latest/doc/LLM/Overview/install_gpu.html) for detailed instruction to set up your environment on Intel GPUs. Remember to distinguish the setup discrepancies between **PyTorch 2.0** and **PyTorch 2.1**.
 
 
 
