@@ -15,19 +15,16 @@ pip install bigdl-llm[xpu] -f https://developer.intel.com/ipex-whl-stable-xpu
 ```
 
 > **注意**
-> 以上命令将会默认安装 `intel_extension_for_pytorch==2.0.110+xpu`
+> 如果您没有使用上面的安装方式，而是使用了旧版本的`bigdl-llm`(早于`2.5.0b20240104`版本)，您需要在代码开头手动导入`import intel_extension_for_pytorch as ipex`。
 
-## 6.1.2 导入 `intel_extension_for_pytorch`
+完成安装后，您需要为英特尔 GPU 配置 oneAPI 环境变量。
 
-安装完成后，让我们转向本教程的 Python 脚本。
-
-要在英特尔 GPU 上启用 BigDL-LLM 优化，需要先导入 `intel_extension_for_pytorch`：
-
-```python
-import intel_extension_for_pytorch as ipex
+```bash
+# 配置 oneAPI 环境变量
+source /opt/intel/oneapi/setvars.sh
 ```
 
-## 6.1.3 (可选) 下载 Llama 2 (7B)
+## 6.1.2 (可选) 下载 Llama 2 (7B)
 
 要从 Hugging Face 下载 [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf) 模型，您需要获得 Meta 授予的访问权限。请按照 [此处](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf/tree/main) 提供的说明申请模型的访问权限。
 
@@ -43,7 +40,7 @@ model_path = snapshot_download(repo_id='meta-llama/Llama-2-7b-chat-hf',
 > **注意**
 > 模型将会默认被下载到 `HF_HOME='~/.cache/huggingface'`.
 
-## 6.1.4 以低精度加载模型
+## 6.1.3 以低精度加载模型
 
 一个常见的用例是以低精度加载 Hugging Face *transformers* 模型，即在加载时进行**隐式**量化。
 
@@ -84,7 +81,7 @@ model_in_8bit_gpu = model_in_8bit.to('xpu')
 >
 > * `load_in_4bit=True` 等价于 `load_in_low_bit='sym_int4'`.
 
-## 6.1.5 加载 Tokenizer 
+## 6.1.4 加载 Tokenizer 
 
 LLM 推理也需要一个 tokenizer. 您可以使用 [Huggingface transformers](https://huggingface.co/docs/transformers/index) API 来直接加载 tokenizer. 它可以与 BigDL-LLM 加载的模型无缝配合使用。对于 Llama 2，对应的 tokenizer 类为 `LlamaTokenizer`.
 
@@ -97,7 +94,7 @@ tokenizer = LlamaTokenizer.from_pretrained(pretrained_model_name_or_path="meta-l
 > **注意**
 > 如果您已经下载了 Llama 2 (7B) 模型并跳过了步骤 [7.1.2.2](#712-optional-download-llama-2-7b)，您可以将`pretrained_model_name_or_path`设置为模型路径。
 
-## 6.1.6 运行模型
+## 6.1.5 运行模型
 
 您可以用与官方 `transformers` API 几乎相同的方式在英特尔 GPU 上使用 BigDL-LLM 优化进行模型推理。**唯一的区别是为 token id 设置 `to('xpu')`**。这里我们为模型创建了一个问答对话模板让其补全。
 
@@ -128,7 +125,7 @@ with torch.inference_mode():
 >
 > 对于关于流式对话的下一节，我们可以将第 7.1.6 节中的这次生成视为一个预热。
 
-## 6.1.7 流式对话
+## 6.1.6 流式对话
 
 现在，让我们构建一个在英特尔 GPU 上运行的流式对话机器人，让 LLM 参与互动对话。聊天机器人的互动并没有什么魔法——它依然依赖于 LLM 预测以及生成下一个 token. 为了让 LLM 对话，我们需要将 prompt 适当的格式化为对话格式，例如：
 

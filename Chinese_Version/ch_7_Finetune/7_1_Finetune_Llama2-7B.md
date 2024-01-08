@@ -16,15 +16,15 @@ pip install accelerate==0.23.0
 ```
 
 > **注意**
-> 
-> 上述命令将默认安装 `intel_extension_for_pytorch==2.0.110+xpu`
+> 如果您没有使用上面的安装方式，而是使用了旧版本的`bigdl-llm`(早于`2.5.0b20240104`版本)，您需要在代码开头手动导入`import intel_extension_for_pytorch as ipex`。
 
-### 7.1.1.2 导入 `intel_extension_for_pytorch`
+### 7.1.1.2 配置 oneAPI 环境变量
 
-安装后，让我们转到本教程的 **Python 脚本**。 首先，您需要先导入`intel_extension_for_pytorch`以启用 xpu 设备：
+完成安装后，您需要为英特尔 GPU 配置 oneAPI 环境变量。
 
-```python
-import intel_extension_for_pytorch as ipex
+```bash
+# 配置 oneAPI 环境变量
+source /opt/intel/oneapi/setvars.sh
 ```
 
 ## 7.1.2 QLoRA 微调
